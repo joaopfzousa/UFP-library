@@ -32,20 +32,23 @@ class UsersController extends Controller
 
     public function create()
     {
-        $this->apiHelpers($this->request, [
+        $this->apiHelpers->validateRequest($this, $this->request, [
             'number' => 'required|unique:users',
-            'password' => 'required'
+            'password' => 'required',
+            'degree' => 'required'
         ]);
 
         $number = $this->request->input('number');
         $password = Hash::make($this->request->input('password'));
         $admin = empty($this->request->input('admin')) ? '0' : $this->request->input('admin');
+        $degree = $this->request->input('degree');
 
         $user = new User;
 
         $user->number = $number;
         $user->password = $password;
         $user->admin = $admin;
+        $user->degree = $degree;
 
         $user->save();
     }

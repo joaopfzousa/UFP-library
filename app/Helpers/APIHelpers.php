@@ -9,8 +9,8 @@ class APIHelpers
         return $user->toJson();
     }
 
-    public function validateRequest($request, $rules)
+    public function validateRequest($controller, $request, $rules)
     {
-        $this->validate($request, $rules);
+        $controller->validate($request, $rules);
     }
 }
