@@ -55,14 +55,22 @@ class UsersController extends Controller
 
     public function show($number)
     {
-        $user = $this->user->where('number', $number)->get();
+        $user = $this->user->where('number', $number)->firstOrFail();
+
+        if (!$user) {
+            abort(404);
+        }
         
         return $this->apiHelpers->jsonResponse($user);
     }
 
     public function update($number)
     {
-        $user = $this->user->where('number', $number)->get();
+        $user = $this->user->where('number', $number)->firstOrFail();
+
+        if (!$user) {
+            abort(404);
+        }
 
         $admin = empty($this->request->input('admin')) ? '0' : $this->request->input('admin');
 
