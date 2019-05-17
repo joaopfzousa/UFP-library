@@ -28,7 +28,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
         $router->get('books', 'BooksController@index');
         $router->get('books/{isbn}', 'BooksController@show');
-            $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+        $router->group(['middleware' => ['jwt.auth', 'user.admin']], function() use ($router) {
             $router->post('books', 'BooksController@create');
             $router->put('books/{isbn}', 'BooksController@update');
             $router->delete('books/{isbn}', 'BooksController@destroy');

@@ -30,8 +30,8 @@ class JwtMiddleware
                 'error' => 'An error while decoding token.'
             ], 400);
         }
-        $user = User::find($credentials->number);
-        
+        $user = User::where('number', $credentials->number)->first();
+
         $request->auth = $user;
         return $next($request);
     }
