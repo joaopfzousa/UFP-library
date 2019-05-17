@@ -20,14 +20,18 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('login', 'AuthController@login');
 
         $router->get('users', 'UsersController@index');
-        $router->post('users', 'UsersController@create');
         $router->get('users/{number}', 'UsersController@show');
-        $router->delete('users/{number}', 'UsersController@destroy');
+        $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+            $router->post('users', 'UsersController@create');
+            $router->delete('users/{number}', 'UsersController@destroy');
+        });
 
         $router->get('books', 'BooksController@index');
-        $router->post('books', 'BooksController@create');
         $router->get('books/{isbn}', 'BooksController@show');
-        $router->put('books/{isbn}', 'BooksController@update');
-        $router->delete('books/{isbn}', 'BooksController@destroy');
+            $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+            $router->post('books', 'BooksController@create');
+            $router->put('books/{isbn}', 'BooksController@update');
+            $router->delete('books/{isbn}', 'BooksController@destroy');
+        });
     });
 });

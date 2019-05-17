@@ -33,8 +33,6 @@ class AuthController extends Controller
             'exp' => time() + 60*60
         ];
         
-        // As you can see we are passing `JWT_SECRET` as the second parameter that will 
-        // be used to decode the token in the future.
         return JWT::encode($payload, env('JWT_SECRET'));
     } 
 
