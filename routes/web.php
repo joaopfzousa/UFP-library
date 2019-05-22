@@ -33,5 +33,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->put('books/{isbn}', 'BooksController@update');
             $router->delete('books/{isbn}', 'BooksController@destroy');
         });
+
+        $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+            $router->post('reservations', 'BookRequestController@create');
+            $router->put('reservations/{reservationId}', 'BookRequestController@update');
+            $router->delete('reservations/{reservationId}', 'BookRequestController@destroy');
+        });
     });
 });

@@ -4,9 +4,9 @@ namespace App\Helpers;
 
 class APIHelpers
 {
-    public function jsonResponse($user)
+    public function jsonResponse($entity)
     {
-        return $user->toJson();
+        return $entity->toJson();
     }
 
     public function validateRequest($controller, $request, $rules)

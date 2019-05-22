@@ -51,6 +51,8 @@ class UsersController extends Controller
         $user->degree = $degree;
 
         $user->save();
+        
+        return $this->apiHelpers->jsonResponse($user);
     }
 
     public function show($number)
@@ -75,11 +77,13 @@ class UsersController extends Controller
         $admin = empty($this->request->input('admin')) ? '0' : $this->request->input('admin');
 
         $user->save();
+
+        return $this->apiHelpers->jsonResponse($user);
     }
 
     public function destroy($number)
     {
-        $user = $this->user->where('number', $number);
+        $user = $this->user->where('number', $number)->firstOrFail();
 
         $user->delete();
     }
