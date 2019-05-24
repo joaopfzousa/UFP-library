@@ -66,6 +66,28 @@ class UsersController extends Controller
         return $this->apiHelpers->jsonResponse($user);
     }
 
+    public function showAllReservations($number)
+    {
+        $user = $this->user->where('number', $number)->firstOrFail();
+
+        if (!$user) {
+            abort(404);
+        }
+        
+        return $this->apiHelpers->jsonResponse($user->getAllReservations());
+    }
+
+    public function showActiveReservations($number)
+    {
+        $user = $this->user->where('number', $number)->firstOrFail();
+
+        if (!$user) {
+            abort(404);
+        }
+        
+        return $this->apiHelpers->jsonResponse($user->getActiveReservations());
+    }
+
     public function update($number)
     {
         $user = $this->user->where('number', $number)->firstOrFail();

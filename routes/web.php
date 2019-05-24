@@ -21,6 +21,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
         $router->get('users', 'UsersController@index');
         $router->get('users/{number}', 'UsersController@show');
+        $router->get('users/{number}/reservations', 'UsersController@showAllReservations');
+        $router->get('users/{number}/active-reservations', 'UsersController@showActiveReservations');
         $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
             $router->post('users', 'UsersController@create');
             $router->delete('users/{number}', 'UsersController@destroy');
