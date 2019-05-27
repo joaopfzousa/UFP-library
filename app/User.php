@@ -78,12 +78,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function getAllReservations()
     {
-        return $this->reservations()->get();
+        return $this->reservations()
+        ->join('books', 'books.id', '=', 'reservations.book_id')
+        ->select('reservations.*', 'books.title AS book_title')
+        ->get();
     }
 
     public function getActiveReservations()
     {
-        return $this->reservations()->where('status', '0')->get();
+        return $this->reservations()
+        ->join('books', 'books.id', '=', 'reservations.book_id')
+        ->select('reservations.*', 'books.title AS book_title')
+        ->where('status', '0')
+        ->get();
     }
 
     private function reservations()
