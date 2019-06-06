@@ -58,6 +58,8 @@ class BooksController extends Controller
         $book->cover = $this->apiHelpers::getBookCoverImage($isbn);
 
         $book->save();
+
+        return $this->apiHelpers->jsonResponse($book);
     }
 
     public function show($isbn)

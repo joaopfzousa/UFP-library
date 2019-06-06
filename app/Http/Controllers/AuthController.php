@@ -28,6 +28,7 @@ class AuthController extends Controller
     protected function jwt(User $user) {
         $payload = [
             'iss' => "lumen-jwt",
+            'user_id' => $user->id,
             'number' => $user->number,
             'iat' => time(),
             'exp' => time() + 86400
