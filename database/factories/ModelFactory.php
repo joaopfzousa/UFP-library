@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
+use App\Helpers\APIHelpers;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,6 @@ $factory->define(App\Book::class, function (Faker\Generator $faker) {
         'edition' => $faker->numberBetween(1, 3),
         'publisher' => $faker->company,
         'location' => $faker->word,
+        'cover' => APIHelpers::getBookCoverImage('9788580410860')
     ];
 });

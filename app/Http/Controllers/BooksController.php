@@ -55,6 +55,7 @@ class BooksController extends Controller
         $book->edition = $edition;
         $book->publisher = $publisher;
         $book->location = $location;
+        $book->cover = $this->apiHelpers::getBookCoverImage($isbn);
 
         $book->save();
     }
