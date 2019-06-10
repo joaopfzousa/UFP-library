@@ -52,8 +52,8 @@ class BookRequestController extends Controller
 
         $bookReservation = new BookReservation;
 
-        $bookReservation->user_id = $userId;
-        $bookReservation->book_id = $bookId;
+        $bookReservation->user_id = intval($userId);
+        $bookReservation->book_id = intval($bookId);
         $bookReservation->reservation_date = $reservationDate;
         $bookReservation->status = 0;
         $bookReservation->renovation = 0;
